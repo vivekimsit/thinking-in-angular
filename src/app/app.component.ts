@@ -6,7 +6,10 @@ import { Product } from './product';
 @Component({
   selector: 'app-component',
   template: `
-  <app-search-bar></app-search-bar>
+  <app-search-bar
+       [filterText]="filterText"
+       [inStockOnly]="inStockOnly"
+       (onFilterTextInput)="handleFilterTextInput($event)"></app-search-bar>
   <app-product-table
        [products]="products"
        [filterText]="filterText"
@@ -25,6 +28,11 @@ export class AppComponent implements OnInit {
     this.title = 'Product Catalogue';
     this.filterText = '';
     this.inStockOnly = false;
+  }
+
+  handleFilterTextInput(filterText): void {
+    console.log('Filter text changed');
+    this.filterText = filterText;
   }
 
   getProducts(): void {

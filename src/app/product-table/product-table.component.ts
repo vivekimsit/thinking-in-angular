@@ -15,7 +15,10 @@ import { Product } from '../product';
 	  <tbody>
 		  <ng-container *ngFor="let product of products">
 			  <tr *ngIf="shouldShowProducts(product)">
-				  <td>{{product.name}}</td>
+				  <td *ngIf="product.stocked">{{product.name}}</td>
+				  <td *ngIf="!product.stocked">
+					<span style="color: red;">{{product.name}}</span>
+				  </td>
 				  <td>{{product.price}}</td>
 			  </tr>
 		  </ng-container>
