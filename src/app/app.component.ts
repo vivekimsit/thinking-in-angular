@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-component',
   template: `
-  <h1>
-    {{title}}
-  </h1>
+  <app-search-bar></app-search-bar>
+  <app-product-table></app-product-table>
   `,
   styles: []
 })
 export class AppComponent {
   title = 'app works!';
+  filterText = '';
+  inStockOnly = false;
 }
