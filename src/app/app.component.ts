@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ProductService } from './product.service';
 import { Product } from './product';
@@ -7,12 +7,15 @@ import { Product } from './product';
   selector: 'app-component',
   template: `
   <app-search-bar></app-search-bar>
-  <app-product-table></app-product-table>
+  <app-product-table
+       [products]="products"
+       [filterText]="filterText"
+       [inStockOnly]="inStockOnly"></app-product-table>
   `,
   styles: [],
   providers: [ProductService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title: string;
   products: Product[]; 
   filterText: string;
@@ -22,5 +25,14 @@ export class AppComponent {
     this.title = 'Product Catalogue';
     this.filterText = '';
     this.inStockOnly = false;
+  }
+
+  getProducts(): void {
+    this.productService.getProducts()
+        .then(products => this.products = products);
+  }
+
+  ngOnInit(): void {
+    this.getProducts();
   }
 }
